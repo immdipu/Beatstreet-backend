@@ -1,6 +1,6 @@
-# Project Name
+# Beatstreet Backend
 
-This is a brief description of the project.
+This is the backend for the Beatstreet project. It is a RESTful API built with Node.js, Express, and MongoDB. It is used to manage users, their favorite music, their playlists. It also sends emails to users when they create an account, reset their password.
 
 ## Prerequisites
 
