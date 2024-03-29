@@ -9,20 +9,20 @@ const getAllHomepagesongs = catchAsync(async (req, res, next) => {
 
   let suggestions = [];
 
-  try {
-    if (req?.user) {
-      const user = await User.findOne({ _id: req.user._id });
-      if (user) {
-        const allUsers = await User.find();
-        const allUserExceptCurrentUser = allUsers.filter(
-          (item) => item._id.toString() !== user._id.toString()
-        );
-        suggestions = await recommendations(user, allUserExceptCurrentUser);
-      }
-    }
-  } catch (error) {
-    console.log(error);
-  }
+  // try {
+  //   if (req?.user) {
+  //     const user = await User.findOne({ _id: req.user._id });
+  //     if (user) {
+  //       const allUsers = await User.find();
+  //       const allUserExceptCurrentUser = allUsers.filter(
+  //         (item) => item._id.toString() !== user._id.toString()
+  //       );
+  //       suggestions = await recommendations(user, allUserExceptCurrentUser);
+  //     }
+  //   }
+  // } catch (error) {
+  //   console.log(error);
+  // }
 
   const data = response.data;
 
