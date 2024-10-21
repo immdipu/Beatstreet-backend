@@ -38,7 +38,17 @@ jobs:
           target: "~/home/dipu/Beatstreet-backend"
           overwrite: true
           rm: true
-          exclude: ".git/**" # exclude .git directory
+          exclude: ".git/**, *.log" # exclude .git directory
+
+      - name: Copy env file
+        if: success() && ${{ github.ref == 'refs/heads/main' }}
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: "cp ~/home/dipu/envs/beatstreet_backend.env ~/home/dipu/Beatstreet-backend/.env"
 
       - name: Restart the server
         if: success() && ${{ github.ref == 'refs/heads/main' }}
