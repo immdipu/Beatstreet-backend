@@ -48,7 +48,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          script: "cp ~/home/dipu/envs/beatstreet_backend.env ~/home/dipu/Beatstreet-backend/.env"
+          script: "cp /home/dipu/envs/beatstreet_backend.env /home/dipu/Beatstreet-backend/.env"
 
       - name: Restart the server
         if: success() && ${{ github.ref == 'refs/heads/main' }}
