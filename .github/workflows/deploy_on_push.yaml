@@ -37,6 +37,8 @@ jobs:
           source: "*"
           target: "~/home/dipu/Beatstreet-backend"
           overwrite: true
+          rm: true
+          exclude: ".git/**" # exclude .git directory
 
       - name: Restart the server
         if: success() && ${{github.ref == 'refs/heads/main'}}
