@@ -59,7 +59,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd /home/dipu/Beatstreet-backend
+            cd ~/home/dipu/Beatstreet-backend
             npm install
             if pm2 describe beatstreet-backend; then
               pm2 restart beatstreet-backend
