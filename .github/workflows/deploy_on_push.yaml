@@ -18,7 +18,7 @@ jobs:
 
       - name: Remove existing files
         if: success() && ${{github.ref == 'refs/heads/main'}}
-        uses: appleboy/scp-action@master
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
