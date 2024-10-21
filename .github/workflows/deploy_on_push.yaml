@@ -36,17 +36,7 @@ jobs:
           port: 22
           source: "*"
           target: "~/home/dipu/Beatstreet-backend"
-
-      - name: Copy .env file
-        if: success() && ${{github.ref == 'refs/heads/main'}}
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: 22
-          source: "/home/dipu/envs/beatstreet_backend.env"
-          target: "/home/dipu/Beatstreet-backend/.env"
+          overwrite: true
 
       - name: Restart the server
         if: success() && ${{github.ref == 'refs/heads/main'}}
