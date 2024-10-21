@@ -45,7 +45,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          source: "~/home/dipu/envs/beatstreeet_backend.env"
+          source: "~/home/dipu/envs/beatstreet_backend.env"
           target: "~/home/dipu/Beatstreet-backend/.env"
 
       - name: Restart the server
