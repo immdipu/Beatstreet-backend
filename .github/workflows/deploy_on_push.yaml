@@ -24,7 +24,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          script: "rm -rf /home/dipu/Beatstreet-backend/*"
+          script: "rm -rf /Beatstreet-backend/*"
 
       - name: Copy files to server
         if: success() && ${{ github.ref == 'refs/heads/main' }}
@@ -35,7 +35,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           source: "*"
-          target: "~/home/dipu/Beatstreet-backend"
+          target: "~/Beatstreet-backend"
           overwrite: true
           rm: true
           exclude: ".git/**, *.log, .env" # exclude .git directory
@@ -48,7 +48,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          script: "cp /home/dipu/envs/beatstreet_backend.env /home/dipu/Beatstreet-backend/.env"
+          script: "cp ~/envs/beatstreet_backend.env ~/Beatstreet-backend/.env"
 
       - name: Restart the server
         if: success() && ${{ github.ref == 'refs/heads/main' }}
@@ -59,7 +59,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: |
-            cd ~/home/dipu/Beatstreet-backend
+            cd ~/Beatstreet-backend
             npm install
             if pm2 describe beatstreet-backend; then
               pm2 restart beatstreet-backend
