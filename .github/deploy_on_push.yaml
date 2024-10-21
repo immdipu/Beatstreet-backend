@@ -1,0 +1,62 @@
+name: Deploy on push to main branch
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Remove existing files
+        if: success() && ${{github.ref == 'refs/heads/main'}}
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: "rm -rf ~/home/dipu/Beatstreet-backend/*"
+
+      - name: Copy files to server
+        if: success() && ${{github.ref == 'refs/heads/main'}}
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          source: "*"
+          target: "~/home/dipu/Beatstreet-backend"
+
+      - name: Copy .env file
+        if: success() && ${{github.ref == 'refs/heads/main'}}
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          source: "~/home/dipu/envs/beatstreeet_backend.env"
+          target: "~/home/dipu/Beatstreet-backend/.env"
+
+      - name: Restart the server
+        if: success() && ${{github.ref == 'refs/heads/main'}}
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            cd ~/home/dipu/Beatstreet-backend
+            npm install
+            pm2 describe beatstreet-backend || pm2 server.js --name beatstreet-backend
