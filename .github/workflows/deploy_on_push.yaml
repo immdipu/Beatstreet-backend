@@ -38,7 +38,7 @@ jobs:
           target: "~/home/dipu/Beatstreet-backend"
           overwrite: true
           rm: true
-          exclude: ".git/**, *.log" # exclude .git directory
+          exclude: ".git/**, *.log, .env" # exclude .git directory
 
       - name: Copy env file
         if: success() && ${{ github.ref == 'refs/heads/main' }}
