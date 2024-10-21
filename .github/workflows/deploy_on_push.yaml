@@ -35,7 +35,7 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           source: "*"
-          target: "/home/dipu/Beatstreet-backend"
+          target: "~/home/dipu/Beatstreet-backend"
           overwrite: true
           rm: true
           exclude: ".git/**, *.log" # exclude .git directory
